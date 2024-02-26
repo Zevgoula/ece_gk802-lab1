@@ -11,8 +11,7 @@ def main():
     def format_expires(expdate):
         try:
             current_datetime = datetime.datetime.now()
-            curdate = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
-            time_dif = expdate - curdate
+            time_dif = expdate - current_datetime
             return str(time_dif)
         except Exception as e:
             return f"The expiration date has passed. Error: ¨{e}"
@@ -42,9 +41,9 @@ def main():
             # Parse
             cookies = url_request.cookies
             for cookie in cookies:
-                expdate = datetime.datetime.fromtimestamp(cookie.expires).strftime('%Y-%m-%d %H:%M:%S')
+                expdate = datetime.datetime.fromtimestamp(cookie.expires)
                 expduration = format_expires(expdate)
-                print(f"Cookie Name: {cookie.name}, Expires: {expduration}")
+                print(f"Cookie Name: {cookie.name},\tExpires in : {expduration}")
 
 
         else:
